@@ -197,7 +197,7 @@
             </div>
             
             <div class="credits" id="gameCredits">
-                Created by Space Defender Team
+                Created by chenul
             </div>
         </div>
         
@@ -222,6 +222,10 @@
         const creditsBtn = document.getElementById('creditsBtn');
         const resumeBtn = document.getElementById('resumeBtn');
         const quitBtn = document.getElementById('quitBtn');
+        const scoreElement = document.getElementById('score');
+        const healthElement = document.getElementById('health');
+        const levelElement = document.getElementById('level');
+        const creditsElement = document.getElementById('gameCredits');
         
         let gameRunning = false;
         let gamePaused = false;
@@ -279,6 +283,7 @@
         let keys = {};
         let enemySpawnTimer = 0;
         let spawnRate = 120; // Increased spawn timer (slower spawn rate)
+        let creditsShown = false;
         
         // Draw player ship
         function drawPlayer() {
@@ -415,8 +420,11 @@
                 
                 // Check if enemy reached bottom
                 if (enemy.y > canvas.height) {
-                    gameOver();
-                    return false;
+                    playerHealth -= 10;
+                    if (playerHealth <= 0) {
+                        gameOver();
+                        return false;
+                    }
                 }
                 
                 return enemy.y < canvas.height + enemy.height;
@@ -451,8 +459,11 @@
         // Check collisions
         function checkCollisions() {
             // Player projectiles vs enemies
-            playerProjectiles.forEach((proj, projIndex) => {
-                enemyObjects.forEach((enemy, enemyIndex) => {
+            for (let projIndex = playerProjectiles.length - 1; projIndex >= 0; projIndex--) {
+                const proj = playerProjectiles[projIndex];
+                for (let enemyIndex = enemyObjects.length - 1; enemyIndex >= 0; enemyIndex--) {
+                    const enemy = enemyObjects[enemyIndex];
+                    
                     if (
                         proj.x > enemy.x - enemy.width/2 &&
                         proj.x < enemy.x + enemy.width/2 &&
@@ -495,10 +506,11 @@
                             
                             // Remove projectile
                             playerProjectiles.splice(projIndex, 1);
+                            break;
                         }
                     }
-                });
-            });
+                }
+            }
         }
         
         // Fire weapon
@@ -513,9 +525,9 @@
         
         // Update UI
         function updateUI() {
-            document.getElementById('score').textContent = score;
-            document.getElementById('health').textContent = playerHealth;
-            document.getElementById('level').textContent = level;
+            scoreElement.textContent = score;
+            healthElement.textContent = playerHealth;
+            levelElement.textContent = level;
         }
         
         // Game over
@@ -565,11 +577,12 @@
         
         // Show credits
         function showCredits() {
-            const credits = document.getElementById('gameCredits');
-            if (credits.textContent === 'Created by Space Defender Team') {
-                credits.textContent = 'Game Design: Space Defender Team | Graphics: Pixel Artists | Programming: JavaScript Wizards';
+            if (!creditsShown) {
+                creditsElement.textContent = 'Game Design: chenul | Programming: chenul | Graphics: chenul';
+                creditsShown = true;
             } else {
-                credits.textContent = 'Created by Space Defender Team';
+                creditsElement.textContent = 'Created by chenul';
+                creditsShown = false;
             }
         }
         
@@ -608,7 +621,7 @@
         
         // Keyboard event listeners
         window.addEventListener('keydown', (e) => {
-            keys[e.key] = true;
+            keys[e.key.toLowerCase()] = true;
             
             // Fire weapon with spacebar
             if (e.key === ' ' && gameRunning && !gamePaused) {
@@ -628,7 +641,7 @@
         });
         
         window.addEventListener('keyup', (e) => {
-            keys[e.key] = false;
+            keys[e.key.toLowerCase()] = false;
         });
         
         // Start the game loop
