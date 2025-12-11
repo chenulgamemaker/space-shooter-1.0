@@ -9,101 +9,82 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            background: linear-gradient(135deg, #0a0a2a, #1a1a4a);
             color: white;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
             padding: 20px;
         }
         
-        .container {
+        .game-container {
+            text-align: center;
             max-width: 900px;
             width: 100%;
-            text-align: center;
         }
         
-        header {
+        .game-header {
             margin-bottom: 20px;
-            padding: 20px;
-            background: rgba(0, 0, 30, 0.7);
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(100, 100, 255, 0.5);
-            border: 2px solid #4a4aff;
+            padding: 15px;
+            background: rgba(0, 20, 40, 0.8);
+            border-radius: 10px;
+            border: 2px solid #00aaff;
         }
         
         h1 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
+            color: #00ffff;
+            text-shadow: 0 0 10px #00aaff;
             margin-bottom: 10px;
-            text-shadow: 0 0 10px #00aaff, 0 0 20px #0088ff;
-            background: linear-gradient(to right, #ff8a00, #ff2070, #00c3ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
         
-        .subtitle {
-            font-size: 1.2rem;
-            color: #aaccff;
-            margin-bottom: 15px;
-        }
-        
-        .game-area {
+        .game-stats {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
+            justify-content: space-around;
             margin-bottom: 20px;
-        }
-        
-        .game-ui {
-            display: flex;
-            justify-content: space-between;
-            background: rgba(0, 10, 40, 0.8);
             padding: 15px;
-            border-radius: 12px;
+            background: rgba(0, 10, 30, 0.7);
+            border-radius: 10px;
             border: 1px solid #3366ff;
         }
         
-        .ui-box {
-            background: rgba(20, 30, 80, 0.6);
-            padding: 10px 15px;
+        .stat {
+            background: rgba(20, 40, 80, 0.6);
+            padding: 10px 20px;
             border-radius: 8px;
             min-width: 150px;
-            box-shadow: 0 0 10px rgba(50, 100, 255, 0.4);
         }
         
-        .ui-title {
+        .stat-label {
             font-size: 0.9rem;
             color: #88aaff;
             margin-bottom: 5px;
         }
         
-        .ui-value {
-            font-size: 1.3rem;
+        .stat-value {
+            font-size: 1.4rem;
             font-weight: bold;
-            color: #4affff;
-        }
-        
-        .weapon-display {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(20, 30, 80, 0.6);
-            padding: 10px 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(50, 100, 255, 0.4);
-        }
-        
-        .weapon-icon {
-            font-size: 1.8rem;
+            color: #ffff00;
         }
         
         .weapon-info {
-            text-align: left;
+            background: rgba(30, 50, 100, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .weapon-icon {
+            font-size: 2rem;
         }
         
         .weapon-name {
@@ -112,40 +93,30 @@
             color: #ffcc00;
         }
         
-        .weapon-desc {
-            font-size: 0.9rem;
-            color: #aaccff;
-        }
-        
         canvas {
             background: #000;
             border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0, 150, 255, 0.7);
-            border: 2px solid #3366ff;
+            border: 3px solid #00aaff;
+            box-shadow: 0 0 30px rgba(0, 150, 255, 0.5);
+            margin-bottom: 20px;
         }
         
         .controls {
-            background: rgba(0, 10, 40, 0.8);
+            background: rgba(0, 20, 40, 0.8);
             padding: 15px;
-            border-radius: 12px;
+            border-radius: 10px;
             border: 1px solid #3366ff;
-            margin-top: 20px;
-        }
-        
-        .controls h3 {
-            margin-bottom: 10px;
-            color: #4affff;
+            margin-bottom: 20px;
         }
         
         .key {
             display: inline-block;
-            background: rgba(40, 60, 120, 0.8);
-            padding: 5px 10px;
+            background: rgba(50, 100, 200, 0.8);
+            padding: 5px 15px;
             margin: 5px;
             border-radius: 5px;
             border: 1px solid #6688ff;
             font-weight: bold;
-            box-shadow: 0 3px 0 rgba(0, 0, 50, 0.8);
         }
         
         .game-message {
@@ -153,187 +124,126 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 20, 50, 0.9);
-            padding: 30px;
+            background: rgba(0, 0, 40, 0.95);
+            padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 0 40px rgba(0, 200, 255, 0.8);
-            border: 3px solid #00aaff;
-            z-index: 100;
+            border: 3px solid #00ffaa;
+            box-shadow: 0 0 50px rgba(0, 255, 170, 0.5);
             text-align: center;
             display: none;
+            z-index: 1000;
         }
         
         .game-message h2 {
             font-size: 2.5rem;
+            color: #00ffaa;
             margin-bottom: 20px;
-            color: #ffcc00;
-        }
-        
-        .game-message p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: #aaccff;
         }
         
         .btn {
-            background: linear-gradient(to bottom, #ff8a00, #ff2070);
+            background: linear-gradient(to bottom, #00aaff, #0066ff);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 30px;
             font-size: 1.1rem;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 5px 0 #cc0066;
-            transition: all 0.2s;
+            margin-top: 20px;
+            transition: transform 0.2s;
         }
         
         .btn:hover {
-            transform: translateY(2px);
-            box-shadow: 0 3px 0 #cc0066;
+            transform: scale(1.05);
         }
         
-        .enemy-info {
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a2a;
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
             justify-content: center;
-            gap: 15px;
+            align-items: center;
+            z-index: 2000;
+        }
+        
+        .loading-text {
+            font-size: 1.2rem;
+            color: #00ffff;
             margin-top: 20px;
         }
         
-        .enemy-card {
-            background: rgba(20, 30, 80, 0.6);
-            padding: 15px;
-            border-radius: 10px;
-            width: 150px;
-            box-shadow: 0 0 10px rgba(50, 100, 255, 0.4);
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 170, 255, 0.3);
+            border-top: 5px solid #00aaff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
         
-        .enemy-name {
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-        
-        .enemy-health {
-            height: 10px;
-            background: rgba(255, 0, 0, 0.3);
-            border-radius: 5px;
-            margin-bottom: 8px;
-            overflow: hidden;
-        }
-        
-        .health-bar {
-            height: 100%;
-            background: linear-gradient(to right, #ff0000, #ff5500);
-        }
-        
-        @media (max-width: 768px) {
-            .game-ui {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .ui-box, .weapon-display {
-                min-width: auto;
-            }
-            
-            canvas {
-                width: 100%;
-                height: auto;
-            }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="spinner"></div>
+        <div class="loading-text">Loading sprites...</div>
+    </div>
+
+    <div class="game-container">
+        <div class="game-header">
             <h1>🚀 SPACE SHOOTER</h1>
-            <p class="subtitle">Defeat the Alien Boss and Save the Galaxy!</p>
-        </header>
+            <p>Defeat all enemies and survive the boss wave!</p>
+        </div>
         
-        <div class="game-area">
-            <div class="game-ui">
-                <div class="ui-box">
-                    <div class="ui-title">SCORE</div>
-                    <div class="ui-value" id="score">0</div>
-                </div>
-                
-                <div class="ui-box">
-                    <div class="ui-title">HEALTH</div>
-                    <div class="ui-value" id="health">100</div>
-                </div>
-                
-                <div class="ui-box">
-                    <div class="ui-title">LEVEL</div>
-                    <div class="ui-value" id="level">1</div>
-                </div>
-                
-                <div class="ui-box">
-                    <div class="ui-title">WEAPON</div>
-                    <div class="ui-value" id="weapon">1/5</div>
-                </div>
+        <div class="game-stats">
+            <div class="stat">
+                <div class="stat-label">SCORE</div>
+                <div class="stat-value" id="score">0</div>
             </div>
-            
-            <div class="weapon-display">
-                <div class="weapon-icon" id="weapon-icon">🔫</div>
-                <div class="weapon-info">
-                    <div class="weapon-name" id="weapon-name">Laser Pistol</div>
-                <div class="weapon-desc" id="weapon-desc">Standard issue weapon</div>
+            <div class="stat">
+                <div class="stat-label">HEALTH</div>
+                <div class="stat-value" id="health">100</div>
             </div>
-            
-            <canvas id="gameCanvas" width="800" height="600"></canvas>
-            
-            <div class="controls">
-                <h3>CONTROLS</h3>
-                <p>
-                    <span class="key">←</span>
-                    <span class="key">→</span>
-                    <span class="key">↑</span>
-                    <span class="key">↓</span> Move |
-                    <span class="key">SPACE</span> Shoot |
-                    <span class="key">Q</span> Previous Weapon |
-                    <span class="key">E</span> Next Weapon
-                </p>
+            <div class="stat">
+                <div class="stat-label">LEVEL</div>
+                <div class="stat-value" id="level">1</div>
             </div>
-            
-            <div class="enemy-info">
-                <div class="enemy-card">
-                    <div class="enemy-name">Scout Drone</div>
-                    <div class="enemy-health">
-                        <div class="health-bar" style="width: 100%"></div>
-                    </div>
-                    <div>Health: 30</div>
-                </div>
-                
-                <div class="enemy-card">
-                    <div class="enemy-name">Fighter Ship</div>
-                    <div class="enemy-health">
-                        <div class="health-bar" style="width: 100%"></div>
-                </div>
-                <div>Health: 50</div>
-                
-                <div class="enemy-card">
-                    <div class="enemy-name">Bomber</div>
-                    <div class="enemy-health">
-                        <div class="health-bar" style="width: 100%"></div>
-                </div>
-                <div>Health: 80</div>
-                
-                <div class="enemy-card">
-                    <div class="enemy-name">Battle Cruiser</div>
-                    <div class="enemy-health">
-                        <div class="health-bar" style="width: 100%"></div>
-                </div>
-                <div>Health: 120</div>
-                
-                <div class="enemy-card">
-                    <div class="enemy-name">Alien Boss</div>
-                    <div class="enemy-health">
-                        <div class="health-bar" style="width: 100%"></div>
-                </div>
-                <div>Health: 500</div>
+            <div class="stat">
+                <div class="stat-label">WEAPON</div>
+                <div class="stat-value" id="weapon">1/5</div>
             </div>
+        </div>
+        
+        <div class="weapon-info">
+            <div class="weapon-icon" id="weaponIcon">🔫</div>
+            <div>
+                <div class="weapon-name" id="weaponName">Laser Pistol</div>
+                <div id="weaponDesc">Standard issue weapon</div>
+            </div>
+        </div>
+        
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        
+        <div class="controls">
+            <h3>CONTROLS</h3>
+            <p>
+                <span class="key">←</span>
+                <span class="key">→</span>
+                <span class="key">↑</span>
+                <span class="key">↓</span> Move |
+                <span class="key">SPACE</span> Shoot |
+                <span class="key">Q</span> Previous Weapon |
+                <span class="key">E</span> Next Weapon
+            </p>
         </div>
         
         <div class="game-message" id="gameOver">
@@ -360,15 +270,21 @@
         let playerHealth = 100;
         let level = 1;
         let currentWeapon = 0;
+        let spritesLoaded = false;
+        
+        // Create off-screen canvas for sprites
+        const spriteCanvas = document.createElement('canvas');
+        const spriteCtx = spriteCanvas.getContext('2d');
         
         // Player object
         const player = {
             x: canvas.width / 2,
-            y: canvas.height - 80,
-            width: 50,
-            height: 40,
-            speed: 7,
-            color: '#4a86ff'
+            y: canvas.height - 100,
+            width: 40,
+            height: 50,
+            speed: 6,
+            spriteX: 0,
+            spriteY: 0
         };
         
         // Weapons array
@@ -380,7 +296,7 @@
                 fireRate: 300,
                 projectileSpeed: 8,
                 color: "#00ffff",
-                description: "Standard issue weapon"
+                description: "Standard rapid fire"
             },
             {
                 name: "Plasma Rifle",
@@ -389,7 +305,7 @@
                 fireRate: 400,
                 projectileSpeed: 7,
                 color: "#ff00ff",
-                description: "Higher damage, slower fire rate"
+                description: "Higher damage"
             },
             {
                 name: "Rocket Launcher",
@@ -407,7 +323,7 @@
                 fireRate: 200,
                 projectileSpeed: 10,
                 color: "#00ffaa",
-                description: "Rapid fire energy weapon"
+                description: "Rapid energy bursts"
             },
             {
                 name: "Quantum Blaster",
@@ -416,7 +332,7 @@
                 fireRate: 800,
                 projectileSpeed: 6,
                 color: "#aa00ff",
-                description: "Ultimate weapon - massive damage"
+                description: "Ultimate weapon"
             }
         ];
         
@@ -424,30 +340,36 @@
         const enemies = [
             {
                 name: "Scout Drone",
-                width: 30,
-                height: 30,
+                width: 25,
+                height: 25,
                 speed: 3,
                 health: 30,
                 color: "#ff5555",
-                points: 10
+                points: 10,
+                spriteX: 50,
+                spriteY: 0
             },
             {
                 name: "Fighter Ship",
-                width: 40,
-                height: 40,
+                width: 35,
+                height: 35,
                 speed: 2,
                 health: 50,
                 color: "#ff8888",
-                points: 20
+                points: 20,
+                spriteX: 100,
+                spriteY: 0
             },
             {
                 name: "Bomber",
-                width: 50,
-                height: 35,
-                speed: 4,
+                width: 45,
+                height: 40,
+                speed: 1.5,
                 health: 80,
                 color: "#ffaa00",
-                points: 30
+                points: 30,
+                spriteX: 150,
+                spriteY: 0
             },
             {
                 name: "Battle Cruiser",
@@ -456,87 +378,152 @@
                 speed: 1,
                 health: 120,
                 color: "#ff4400",
-                points: 50
+                points: 50,
+                spriteX: 200,
+                spriteY: 0
             },
             {
                 name: "Alien Boss",
                 width: 100,
                 height: 70,
-                speed: 1,
+                speed: 0.5,
                 health: 500,
                 color: "#aa0000",
-                points: 500
+                points: 500,
+                spriteX: 0,
+                spriteY: 100
             }
         ];
         
-        // Game objects arrays
+        // Game objects
         let playerProjectiles = [];
         let enemyProjectiles = [];
         let enemyObjects = [];
         let particles = [];
-        let powerUps = [];
-        
-        // Game state
         let keys = {};
         let lastFired = 0;
         let enemySpawnTimer = 0;
         let bossSpawned = false;
         
-        // Draw player ship
+        // Create sprite sheet
+        function createSprites() {
+            spriteCanvas.width = 300;
+            spriteCanvas.height = 200;
+            
+            // Clear sprite canvas
+            spriteCtx.clearRect(0, 0, spriteCanvas.width, spriteCanvas.height);
+            
+            // Player ship (Blue)
+            spriteCtx.fillStyle = '#00aaff';
+            spriteCtx.beginPath();
+            spriteCtx.moveTo(20, 60);
+            spriteCtx.lineTo(0, 80);
+            spriteCtx.lineTo(40, 80);
+            spriteCtx.closePath();
+            spriteCtx.fill();
+            
+            // Player ship details
+            spriteCtx.fillStyle = '#0088ff';
+            spriteCtx.fillRect(10, 70, 20, 10);
+            spriteCtx.fillStyle = '#88ddff';
+            spriteCtx.beginPath();
+            spriteCtx.arc(20, 65, 5, 0, Math.PI * 2);
+            spriteCtx.fill();
+            
+            // Enemy 1 - Scout Drone (Red)
+            spriteCtx.fillStyle = '#ff5555';
+            spriteCtx.fillRect(50, 0, 25, 25);
+            spriteCtx.fillStyle = '#ff0000';
+            spriteCtx.fillRect(55, 5, 15, 15);
+            
+            // Enemy 2 - Fighter Ship (Orange)
+            spriteCtx.fillStyle = '#ffaa00';
+            spriteCtx.beginPath();
+            spriteCtx.moveTo(100, 0);
+            spriteCtx.lineTo(85, 35);
+            spriteCtx.lineTo(115, 35);
+            spriteCtx.closePath();
+            spriteCtx.fill();
+            
+            // Enemy 3 - Bomber (Yellow)
+            spriteCtx.fillStyle = '#ffff00';
+            spriteCtx.fillRect(150, 0, 45, 40);
+            spriteCtx.fillStyle = '#ffcc00';
+            spriteCtx.fillRect(155, 10, 35, 20);
+            
+            // Enemy 4 - Battle Cruiser (Purple)
+            spriteCtx.fillStyle = '#aa55ff';
+            spriteCtx.fillRect(200, 0, 60, 45);
+            spriteCtx.fillStyle = '#8844ff';
+            spriteCtx.fillRect(205, 10, 50, 25);
+            
+            // Boss - Alien Boss (Dark Red)
+            spriteCtx.fillStyle = '#aa0000';
+            spriteCtx.fillRect(0, 100, 100, 70);
+            spriteCtx.fillStyle = '#880000';
+            spriteCtx.fillRect(20, 110, 60, 40);
+            spriteCtx.fillStyle = '#ff0000';
+            spriteCtx.fillRect(30, 120, 40, 20);
+            
+            console.log("Sprites created successfully!");
+            spritesLoaded = true;
+            document.getElementById('loadingScreen').style.display = 'none';
+        }
+        
+        // Draw player from sprite sheet
         function drawPlayer() {
-            ctx.fillStyle = player.color;
-            ctx.beginPath();
-            ctx.moveTo(player.x, player.y - player.height/2);
-            ctx.lineTo(player.x - player.width/2, player.y + player.height/2);
-            ctx.lineTo(player.x + player.width/2, player.y + player.height/2);
-            ctx.closePath();
-            ctx.fill();
-            
-            // Draw wings
-            ctx.fillStyle = '#3366cc';
-            ctx.fillRect(player.x - player.width/2 - 10, player.y, player.width + 20, 10);
-            
-            // Draw cockpit
-            ctx.fillStyle = '#88aaff';
-            ctx.beginPath();
-            ctx.arc(player.x, player.y - 5, 8, 0, Math.PI * 2);
-            ctx.fill();
+            if (spritesLoaded) {
+                ctx.drawImage(spriteCanvas, 
+                    player.spriteX, player.spriteY, 40, 50,
+                    player.x - player.width/2, player.y - player.height/2, 
+                    player.width, player.height);
+            } else {
+                // Fallback if sprites not loaded
+                ctx.fillStyle = '#00aaff';
+                ctx.beginPath();
+                ctx.moveTo(player.x, player.y - player.height/2);
+                ctx.lineTo(player.x - player.width/2, player.y + player.height/2);
+                ctx.lineTo(player.x + player.width/2, player.y + player.height/2);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+        
+        // Draw enemy from sprite sheet
+        function drawEnemy(enemy) {
+            if (spritesLoaded) {
+                ctx.drawImage(spriteCanvas, 
+                    enemy.spriteX, enemy.spriteY, enemy.width, enemy.height,
+                    enemy.x - enemy.width/2, enemy.y - enemy.height/2, 
+                    enemy.width, enemy.height);
+            } else {
+                // Fallback if sprites not loaded
+                ctx.fillStyle = enemy.color;
+                ctx.fillRect(enemy.x - enemy.width/2, enemy.y - enemy.height/2, 
+                           enemy.width, enemy.height);
+            }
         }
         
         // Draw projectiles
         function drawProjectiles() {
-            // Player projectiles
             playerProjectiles.forEach(proj => {
                 ctx.fillStyle = weapons[currentWeapon].color;
                 ctx.beginPath();
                 ctx.arc(proj.x, proj.y, proj.radius, 0, Math.PI * 2);
                 ctx.fill();
                 
-                // Add glow effect
+                // Glow effect
                 ctx.shadowColor = weapons[currentWeapon].color;
                 ctx.shadowBlur = 15;
                 ctx.fill();
                 ctx.shadowBlur = 0;
             });
             
-            // Enemy projectiles
             enemyProjectiles.forEach(proj => {
                 ctx.fillStyle = proj.color;
                 ctx.beginPath();
                 ctx.arc(proj.x, proj.y, proj.radius, 0, Math.PI * 2);
                 ctx.fill();
-            });
-        }
-        
-        // Draw enemies
-        function drawEnemies() {
-            enemyObjects.forEach(enemy => {
-                ctx.fillStyle = enemy.color;
-                ctx.fillRect(enemy.x - enemy.width/2, enemy.y - enemy.height/2, enemy.width, enemy.height);
-                
-                // Draw enemy details
-                ctx.fillStyle = '#ffaaaa';
-                ctx.fillRect(enemy.x - enemy.width/4, enemy.y - enemy.height/4, enemy.width/2, enemy.height/2);
             });
         }
         
@@ -548,343 +535,4 @@
                 ctx.beginPath();
                 ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
                 ctx.fill();
-            });
-            ctx.globalAlpha = 1;
-        }
-        
-        // Draw background
-        function drawBackground() {
-            // Draw space background
-            ctx.fillStyle = '#000011';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw stars
-            ctx.fillStyle = 'white';
-            for (let i = 0; i < 100; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const radius = Math.random() * 1.5;
-                ctx.beginPath();
-                ctx.arc(x, y, radius, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-        
-        // Update player position based on keys
-        function updatePlayer() {
-            if (keys['ArrowLeft'] && player.x > player.width/2) {
-                player.x -= player.speed;
-            }
-            if (keys['ArrowRight'] && player.x < canvas.width - player.width/2) {
-                player.x += player.speed;
-            }
-            if (keys['ArrowUp'] && player.y > player.height/2) {
-                player.y -= player.speed;
-            }
-            if (keys['ArrowDown'] && player.y < canvas.height - player.height/2) {
-                player.y += player.speed;
-            }
-        }
-        
-        // Update projectiles
-        function updateProjectiles() {
-            // Update player projectiles
-            playerProjectiles = playerProjectiles.filter(proj => {
-                proj.y -= proj.speed;
-                return proj.y > 0;
-            });
-            
-            // Update enemy projectiles
-            enemyProjectiles = enemyProjectiles.filter(proj => {
-                proj.y += proj.speed;
-                return proj.y < canvas.height;
-            });
-        }
-        
-        // Update enemies
-        function updateEnemies() {
-            enemyObjects = enemyObjects.filter(enemy => {
-                enemy.y += enemy.speed;
-                
-                // Enemy shooting logic
-                if (Math.random() < 0.02) {
-                    enemyProjectiles.push({
-                        x: enemy.x,
-                        y: enemy.y + enemy.height/2,
-                        radius: 4,
-                        speed: 5,
-                        color: '#ff5555'
-                    });
-                }
-                
-                return enemy.y < canvas.height + enemy.height;
-            });
-        }
-        
-        // Update particles
-        function updateParticles() {
-            particles = particles.filter(particle => {
-                particle.x += particle.vx;
-                particle.y += particle.vy;
-                particle.alpha -= 0.02;
-                return particle.alpha > 0;
-            });
-        }
-        
-        // Spawn enemies
-        function spawnEnemies() {
-            enemySpawnTimer++;
-            
-            // Spawn regular enemies
-            if (enemySpawnTimer % 60 === 0 && enemyObjects.length < 10) {
-                const enemyType = Math.floor(Math.random() * 4);
-                enemyObjects.push({
-                    ...enemies[enemyType],
-                    x: Math.random() * (canvas.width - enemies[enemyType].width) + enemies[enemyType].width/2,
-                    y: -enemies[enemyType].height
-                });
-            }
-            
-            // Spawn boss
-            if (score >= 500 && !bossSpawned) {
-                enemyObjects.push({
-                    ...enemies[4], // Boss
-                    x: canvas.width / 2,
-                    y: -enemies[4].height
-                });
-                bossSpawned = true;
-            }
-        }
-        
-        // Check collisions
-        function checkCollisions() {
-            // Player projectiles vs enemies
-            playerProjectiles.forEach((proj, projIndex) => {
-                enemyObjects.forEach((enemy, enemyIndex) => {
-                    if (
-                        proj.x > enemy.x - enemy.width/2 &&
-                        proj.x < enemy.x + enemy.width/2 &&
-                        proj.y > enemy.y - enemy.height/2 &&
-                        proj.y < enemy.y + enemy.height/2
-                    ) {
-                        // Hit enemy
-                        enemy.health -= weapons[currentWeapon].damage;
-                        
-                        // Create explosion particles
-                        for (let i = 0; i < 5; i++) {
-                        particles.push({
-                            x: enemy.x,
-                            y: enemy.y,
-                            radius: Math.random() * 3 + 1,
-                            color: enemy.color,
-                            alpha: 1,
-                            vx: (Math.random() - 0.5) * 4,
-                            vy: (Math.random() - 0.5) * 4
-                        });
-                    }
-                    
-                    // Check if enemy is destroyed
-                    if (enemy.health <= 0) {
-                        enemyObjects.splice(enemyIndex, 1);
-                        score += enemy.points;
-                        
-                        // Create more explosion particles
-                        for (let i = 0; i < 15; i++) {
-                        particles.push({
-                            x: enemy.x,
-                            y: enemy.y,
-                            radius: Math.random() * 4 + 2,
-                            color: '#ffff00',
-                            alpha: 1,
-                            vx: (Math.random() - 0.5) * 6,
-                            vy: (Math.random() - 0.5) * 6
-                        });
-                    }
-                    
-                    // Remove projectile
-                    playerProjectiles.splice(projIndex, 1);
-                }
-            });
-        });
-        
-        // Enemy projectiles vs player
-        enemyProjectiles.forEach((proj, projIndex) => {
-            if (
-                proj.x > player.x - player.width/2 &&
-                proj.x < player.x + player.width/2 &&
-                proj.y > player.y - player.height/2 &&
-                proj.y < player.y + player.height/2
-                ) {
-                    // Hit player
-                    playerHealth -= 10;
-                    enemyProjectiles.splice(projIndex, 1);
-                    
-                    // Check if player is dead
-                    if (playerHealth <= 0) {
-                        gameOver();
-                    }
-                }
-            });
-        }
-        
-        // Player vs enemies
-        enemyObjects.forEach((enemy, enemyIndex) => {
-            if (
-                player.x + player.width/2 > enemy.x - enemy.width/2 &&
-                player.x - player.width/2 < enemy.x + enemy.width/2 &&
-                player.y + player.height/2 > enemy.y - enemy.height/2 &&
-                player.y - player.height/2 < enemy.y + enemy.height/2
-            ) {
-                // Collision with enemy
-                playerHealth -= 20;
-                enemyObjects.splice(enemyIndex, 1);
-                
-                // Create explosion particles
-                for (let i = 0; i < 20; i++) {
-                    particles.push({
-                        x: enemy.x,
-                        y: enemy.y,
-                        radius: Math.random() * 5 + 2,
-                        color: '#ff0000',
-                        alpha: 1,
-                        vx: (Math.random() - 0.5) * 8,
-                        vy: (Math.random() - 0.5) * 8
-                    });
-                }
-                
-                // Check if player is dead
-                if (playerHealth <= 0) {
-                    gameOver();
-                }
-            }
-        });
-    }
-    
-    // Fire weapon
-    function fireWeapon() {
-        const now = Date.now();
-        if (now - lastFired > weapons[currentWeapon].fireRate) {
-            playerProjectiles.push({
-                x: player.x,
-                y: player.y - player.height/2,
-                radius: 3,
-                speed: weapons[currentWeapon].projectileSpeed
-            });
-            
-            lastFired = now;
-        }
-    }
-    
-    // Update UI
-    function updateUI() {
-        document.getElementById('score').textContent = score;
-        document.getElementById('health').textContent = playerHealth;
-        document.getElementById('level').textContent = level;
-        document.getElementById('weapon').textContent = `${currentWeapon + 1}/${weapons.length}`;
-        document.getElementById('weapon-icon').textContent = weapons[currentWeapon].icon;
-        document.getElementById('weapon-name').textContent = weapons[currentWeapon].name;
-        document.getElementById('weapon-desc').textContent = weapons[currentWeapon].description;
-    }
-    
-    // Game over
-    function gameOver() {
-        gameRunning = false;
-        document.getElementById('finalScore').textContent = score;
-        document.getElementById('gameOver').style.display = 'block';
-    }
-    
-    // Game win
-    function gameWin() {
-        gameRunning = false;
-        document.getElementById('winScore').textContent = score;
-        document.getElementById('gameWin').style.display = 'block';
-    }
-    
-    // Restart game
-    function restartGame() {
-        // Reset game state
-        gameRunning = true;
-        score = 0;
-        playerHealth = 100;
-        level = 1;
-        currentWeapon = 0;
-        playerProjectiles = [];
-        enemyProjectiles = [];
-        enemyObjects = [];
-        particles = [];
-        powerUps = [];
-        bossSpawned = false;
-        
-        // Reset player position
-        player.x = canvas.width / 2;
-        player.y = canvas.height - 80;
-        
-        // Hide messages
-        document.getElementById('gameOver').style.display = 'none';
-        document.getElementById('gameWin').style.display = 'none';
-    }
-    
-    // Main game loop
-    function gameLoop() {
-        // Clear canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Draw game elements
-        drawBackground();
-        drawEnemies();
-        drawPlayer();
-        drawProjectiles();
-        drawParticles();
-        
-        // Update game elements
-        if (gameRunning) {
-            updatePlayer();
-            updateProjectiles();
-            updateEnemies();
-            updateParticles();
-            spawnEnemies();
-            checkCollisions();
-            updateUI();
-            
-            // Check for win condition (boss defeated)
-            if (bossSpawned && enemyObjects.length === 0) {
-                gameWin();
-            }
-        }
-        
-        // Request next frame
-        requestAnimationFrame(gameLoop);
-    }
-    
-    // Event listeners
-    window.addEventListener('keydown', (e) => {
-        keys[e.key] = true;
-        
-        // Fire weapon with spacebar
-        if (e.key === ' ' && gameRunning) {
-            e.preventDefault();
-            fireWeapon();
-        }
-        
-        // Switch weapons
-        if (e.key === 'q' && gameRunning) {
-            currentWeapon = (currentWeapon - 1 + weapons.length) % weapons.length;
-        }
-        
-        if (e.key === 'e' && gameRunning) {
-            currentWeapon = (currentWeapon + 1) % weapons.length;
-        }
-    });
-    
-    window.addEventListener('keyup', (e) => {
-        keys[e.key] = false;
-    });
-    
-    // Start the game
-    gameLoop();
-    
-    // Initial UI update
-    updateUI();
-    </script>
-</body>
-</html>
+           
