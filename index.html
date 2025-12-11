@@ -9,185 +9,206 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        
         body {
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: white;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 20px;
-            font-family: 'Arial', sans-serif;
             overflow: hidden;
         }
-        .container {
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-        }
-        header {
-            margin-bottom: 20px;
-            padding: 15px;
-            background: rgba(0, 0, 30, 0.7);
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(100, 100, 255, 0.5);
+        
+        .game-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
             border: 2px solid #4a4aff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(100, 100, 255, 0.5);
         }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px #00aaff;
-            color: #4affff;
+        
+        #gameCanvas {
+            background: #000;
+            display: block;
         }
-        .subtitle {
-            font-size: 1.1rem;
-            color: #aaccff;
-            margin-bottom: 15px;
-        }
-        .game-area {
+        
+        .menu, .pause-menu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 10, 40, 0.95);
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 10;
         }
+        
+        .pause-menu {
+            display: none;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #4affff;
+            text-shadow: 0 0 15px #00aaff;
+            letter-spacing: 3px;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #ffcc00;
+        }
+        
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .btn {
+            background: linear-gradient(to bottom, #ff8a00, #ff2070);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 0 #cc0066;
+            transition: all 0.2s;
+            width: 200px;
+        }
+        
+        .btn:hover {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #cc0066;
+        }
+        
+        .credits {
+            position: absolute;
+            bottom: 20px;
+            color: #aaccff;
+            font-size: 0.9rem;
+        }
+        
         .game-ui {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 100%;
             display: flex;
             justify-content: space-between;
-            background: rgba(0, 10, 40, 0.8);
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #3366ff;
+            padding: 0 20px;
+            z-index: 5;
         }
+        
         .ui-box {
             background: rgba(20, 30, 80, 0.6);
-            padding: 8px 12px;
+            padding: 8px 15px;
             border-radius: 6px;
-            min-width: 100px;
             box-shadow: 0 0 8px rgba(50, 100, 255, 0.4);
+            border: 1px solid #3366ff;
         }
+        
         .ui-title {
             font-size: 0.8rem;
             color: #88aaff;
-            margin-bottom: 3px;
         }
+        
         .ui-value {
             font-size: 1.2rem;
             font-weight: bold;
             color: #4affff;
         }
-        canvas {
-            background: #000;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 150, 255, 0.7);
-            border: 2px solid #3366ff;
+        
+        .controls-info {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #88aaff;
+            font-size: 0.9rem;
         }
-        .controls {
-            background: rgba(0, 10, 40, 0.8);
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #3366ff;
-            margin-top: 15px;
-        }
-        .controls h3 {
-            margin-bottom: 8px;
-            color: #4affff;
-        }
+        
         .key {
             display: inline-block;
             background: rgba(40, 60, 120, 0.8);
-            padding: 4px 8px;
-            margin: 3px;
+            padding: 3px 8px;
+            margin: 0 2px;
             border-radius: 4px;
             border: 1px solid #6688ff;
             font-weight: bold;
+            font-size: 0.8rem;
             box-shadow: 0 2px 0 rgba(0, 0, 50, 0.8);
-        }
-        .game-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 20, 50, 0.9);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(0, 200, 255, 0.8);
-            border: 3px solid #00aaff;
-            z-index: 100;
-            text-align: center;
-            display: none;
-        }
-        .game-message h2 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-            color: #ffcc00;
-        }
-        .game-message p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            color: #aaccff;
-        }
-        .btn {
-            background: linear-gradient(to bottom, #ff8a00, #ff2070);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 4px 0 #cc0066;
-            transition: all 0.2s;
-        }
-        .btn:hover {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #cc0066;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🚀 SPACE SHOOTER</h1>
-            <p class="subtitle">Destroy enemies before they reach the bottom!</p>
-        </header>
+    <div class="game-container">
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
         
-        <div class="game-area">
-            <div class="game-ui">
-                <div class="ui-box">
-                    <div class="ui-title">SCORE</div>
-                    <div class="ui-value" id="score">0</div>
-                </div>
-                
-                <div class="ui-box">
-                    <div class="ui-title">HEALTH</div>
-                    <div class="ui-value" id="health">100</div>
-                </div>
-                
-                <div class="ui-box">
-                    <div class="ui-title">LEVEL</div>
-                    <div class="ui-value" id="level">1</div>
-                </div>
+        <div class="game-ui">
+            <div class="ui-box">
+                <div class="ui-title">SCORE</div>
+                <div class="ui-value" id="score">0</div>
             </div>
             
-            <canvas id="gameCanvas" width="800" height="500"></canvas>
+            <div class="ui-box">
+                <div class="ui-title">HEALTH</div>
+                <div class="ui-value" id="health">100</div>
+            </div>
             
-            <div class="controls">
-                <h3>CONTROLS</h3>
-                <p>
-                    <span class="key">W</span>
-                    <span class="key">A</span>
-                    <span class="key">S</span>
-                    <span class="key">D</span> Move |
-                    <span class="key">SPACE</span> Shoot
-                </p>
+            <div class="ui-box">
+                <div class="ui-title">LEVEL</div>
+                <div class="ui-value" id="level">1</div>
             </div>
         </div>
         
-        <div class="game-message" id="gameOver">
-            <h2>GAME OVER</h2>
-            <p>Enemies reached the bottom!</p>
-            <p>Final Score: <span id="finalScore">0</span></p>
-            <button class="btn" onclick="restartGame()">PLAY AGAIN</button>
+        <div class="controls-info">
+            <span class="key">W</span>
+            <span class="key">A</span>
+            <span class="key">S</span>
+            <span class="key">D</span> Move | 
+            <span class="key">SPACE</span> Shoot | 
+            <span class="key">ESC</span> Pause
+        </div>
+        
+        <!-- Main Menu -->
+        <div class="menu" id="mainMenu">
+            <h1>SPACE DEFENDER</h1>
+            <h2>Protect the Galaxy!</h2>
+            
+            <div class="menu-buttons">
+                <button class="btn" id="playBtn">PLAY GAME</button>
+                <button class="btn" id="creditsBtn">CREDITS</button>
+            </div>
+            
+            <div class="credits" id="gameCredits">
+                Created by Space Defender Team
+            </div>
+        </div>
+        
+        <!-- Pause Menu -->
+        <div class="pause-menu" id="pauseMenu">
+            <h1>GAME PAUSED</h1>
+            
+            <div class="menu-buttons">
+                <button class="btn" id="resumeBtn">RESUME</button>
+                <button class="btn" id="quitBtn">QUIT TO MENU</button>
+            </div>
         </div>
     </div>
 
@@ -195,7 +216,15 @@
         // Game variables
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        let gameRunning = true;
+        const mainMenu = document.getElementById('mainMenu');
+        const pauseMenu = document.getElementById('pauseMenu');
+        const playBtn = document.getElementById('playBtn');
+        const creditsBtn = document.getElementById('creditsBtn');
+        const resumeBtn = document.getElementById('resumeBtn');
+        const quitBtn = document.getElementById('quitBtn');
+        
+        let gameRunning = false;
+        let gamePaused = false;
         let score = 0;
         let playerHealth = 100;
         let level = 1;
@@ -203,9 +232,9 @@
         // Player object
         const player = {
             x: canvas.width / 2,
-            y: canvas.height - 60,
-            width: 40,
-            height: 30,
+            y: canvas.height - 80,
+            width: 50,
+            height: 40,
             speed: 6,
             color: '#4a86ff'
         };
@@ -249,9 +278,11 @@
         // Game state
         let keys = {};
         let enemySpawnTimer = 0;
+        let spawnRate = 120; // Increased spawn timer (slower spawn rate)
         
         // Draw player ship
         function drawPlayer() {
+            // Ship body
             ctx.fillStyle = player.color;
             ctx.beginPath();
             ctx.moveTo(player.x, player.y - player.height/2);
@@ -260,14 +291,21 @@
             ctx.closePath();
             ctx.fill();
             
-            // Draw wings
+            // Wings
             ctx.fillStyle = '#3366cc';
-            ctx.fillRect(player.x - player.width/2 - 8, player.y, player.width + 16, 8);
+            ctx.fillRect(player.x - player.width/2 - 10, player.y + 5, player.width + 20, 8);
             
-            // Draw cockpit
+            // Cockpit
             ctx.fillStyle = '#88aaff';
             ctx.beginPath();
-            ctx.arc(player.x, player.y - 5, 6, 0, Math.PI * 2);
+            ctx.arc(player.x, player.y - 5, 8, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Engine glow
+            ctx.fillStyle = '#ff9900';
+            ctx.beginPath();
+            ctx.arc(player.x - 12, player.y + player.height/2 + 5, 4, 0, Math.PI * 2);
+            ctx.arc(player.x + 12, player.y + player.height/2 + 5, 4, 0, Math.PI * 2);
             ctx.fill();
         }
         
@@ -277,9 +315,14 @@
                 ctx.fillStyle = enemy.color;
                 ctx.fillRect(enemy.x - enemy.width/2, enemy.y - enemy.height/2, enemy.width, enemy.height);
                 
-                // Draw enemy details
+                // Enemy details
                 ctx.fillStyle = '#ffaaaa';
                 ctx.fillRect(enemy.x - enemy.width/4, enemy.y - enemy.height/4, enemy.width/2, enemy.height/2);
+                
+                // Enemy health bar
+                const healthPercent = enemy.health / (enemy.name === "Scout" ? 20 : enemy.name === "Fighter" ? 30 : 50);
+                ctx.fillStyle = '#ff0000';
+                ctx.fillRect(enemy.x - enemy.width/2, enemy.y - enemy.height/2 - 8, enemy.width * healthPercent, 4);
             });
         }
         
@@ -292,7 +335,7 @@
                 ctx.arc(proj.x, proj.y, proj.radius, 0, Math.PI * 2);
                 ctx.fill();
                 
-                // Add glow effect
+                // Projectile glow
                 ctx.shadowColor = '#00ffff';
                 ctx.shadowBlur = 10;
                 ctx.fill();
@@ -314,20 +357,30 @@
         
         // Draw background
         function drawBackground() {
-            // Draw space background
+            // Space background
             ctx.fillStyle = '#000011';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Draw stars
+            // Stars
             ctx.fillStyle = 'white';
-            for (let i = 0; i < 80; i++) {
+            for (let i = 0; i < 100; i++) {
                 const x = Math.random() * canvas.width;
                 const y = Math.random() * canvas.height;
-                const radius = Math.random() * 1.2;
+                const radius = Math.random() * 1.5;
                 ctx.beginPath();
                 ctx.arc(x, y, radius, 0, Math.PI * 2);
                 ctx.fill();
             }
+            
+            // Nebula effect
+            const gradient = ctx.createRadialGradient(
+                canvas.width/2, canvas.height/2, 0,
+                canvas.width/2, canvas.height/2, canvas.width/1.5
+            );
+            gradient.addColorStop(0, 'rgba(50, 0, 100, 0.1)';
+            gradient.addColorStop(1, 'rgba(20, 0, 60, 0.3)';
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
         
         // Update player position based on keys
@@ -384,8 +437,8 @@
         function spawnEnemies() {
             enemySpawnTimer++;
             
-            // Spawn regular enemies
-            if (enemySpawnTimer % 60 === 0 && enemyObjects.length < 8) {
+            // Spawn regular enemies (slower spawn rate)
+            if (enemySpawnTimer % spawnRate === 0 && enemyObjects.length < 5) {
                 const enemyType = Math.floor(Math.random() * enemies.length);
                 enemyObjects.push({
                     ...enemies[enemyType],
@@ -453,7 +506,7 @@
             playerProjectiles.push({
                 x: player.x,
                 y: player.y - player.height/2,
-                radius: 3,
+                radius: 4,
                 speed: 8
             });
         }
@@ -468,14 +521,14 @@
         // Game over
         function gameOver() {
             gameRunning = false;
-            document.getElementById('finalScore').textContent = score;
-            document.getElementById('gameOver').style.display = 'block';
+            mainMenu.style.display = 'flex';
+            pauseMenu.style.display = 'none';
         }
         
-        // Restart game
-        function restartGame() {
-            // Reset game state
+        // Start game
+        function startGame() {
             gameRunning = true;
+            gamePaused = false;
             score = 0;
             playerHealth = 100;
             level = 1;
@@ -483,12 +536,41 @@
             enemyObjects = [];
             particles = [];
             
-            // Reset player position
             player.x = canvas.width / 2;
-            player.y = canvas.height - 60;
+            player.y = canvas.height - 80;
             
-            // Hide message
-            document.getElementById('gameOver').style.display = 'none';
+            mainMenu.style.display = 'none';
+            pauseMenu.style.display = 'none';
+        }
+        
+        // Pause game
+        function pauseGame() {
+            gamePaused = true;
+            pauseMenu.style.display = 'flex';
+        }
+        
+        // Resume game
+        function resumeGame() {
+            gamePaused = false;
+            pauseMenu.style.display = 'none';
+        }
+        
+        // Quit to menu
+        function quitToMenu() {
+            gameRunning = false;
+            gamePaused = false;
+            mainMenu.style.display = 'flex';
+            pauseMenu.style.display = 'none';
+        }
+        
+        // Show credits
+        function showCredits() {
+            const credits = document.getElementById('gameCredits');
+            if (credits.textContent === 'Created by Space Defender Team') {
+                credits.textContent = 'Game Design: Space Defender Team | Graphics: Pixel Artists | Programming: JavaScript Wizards';
+            } else {
+                credits.textContent = 'Created by Space Defender Team';
+            }
         }
         
         // Main game loop
@@ -504,7 +586,7 @@
             drawParticles();
             
             // Update game elements
-            if (gameRunning) {
+            if (gameRunning && !gamePaused) {
                 updatePlayer();
                 updateProjectiles();
                 updateEnemies();
@@ -518,14 +600,30 @@
             requestAnimationFrame(gameLoop);
         }
         
-        // Event listeners
+        // Event listeners for buttons
+        playBtn.addEventListener('click', startGame);
+        creditsBtn.addEventListener('click', showCredits);
+        resumeBtn.addEventListener('click', resumeGame);
+        quitBtn.addEventListener('click', quitToMenu);
+        
+        // Keyboard event listeners
         window.addEventListener('keydown', (e) => {
             keys[e.key] = true;
             
             // Fire weapon with spacebar
-            if (e.key === ' ' && gameRunning) {
+            if (e.key === ' ' && gameRunning && !gamePaused) {
                 e.preventDefault();
                 fireWeapon();
+            }
+            
+            // Pause game with ESC
+            if (e.key === 'Escape' && gameRunning) {
+                e.preventDefault();
+                if (gamePaused) {
+                    resumeGame();
+                } else {
+                    pauseGame();
+                }
             }
         });
         
@@ -533,7 +631,7 @@
             keys[e.key] = false;
         });
         
-        // Start the game
+        // Start the game loop
         gameLoop();
     </script>
 </body>
