@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space Shooter</title>
+    <title>Space Shooter - Fixed Play Button</title>
     <style>
         * {
             margin: 0;
@@ -282,7 +282,7 @@
         // Game state
         let keys = {};
         let enemySpawnTimer = 0;
-        let spawnRate = 120; // Increased spawn timer (slower spawn rate)
+        let spawnRate = 120;
         let creditsShown = false;
         
         // Draw player ship
@@ -462,56 +462,55 @@
             for (let projIndex = playerProjectiles.length - 1; projIndex >= 0; projIndex--) {
                 const proj = playerProjectiles[projIndex];
                 for (let enemyIndex = enemyObjects.length - 1; enemyIndex >= 0; enemyIndex--) {
-                    const enemy = enemyObjects[enemyIndex];
+                const enemy = enemyObjects[enemyIndex];
+                
+                if (
+                    proj.x > enemy.x - enemy.width/2 &&
+                    proj.x < enemy.x + enemy.width/2 &&
+                    proj.y > enemy.y - enemy.height/2 &&
+                    proj.y < enemy.y + enemy.height/2
+                ) {
+                    // Hit enemy
+                    enemy.health -= 10;
                     
-                    if (
-                        proj.x > enemy.x - enemy.width/2 &&
-                        proj.x < enemy.x + enemy.width/2 &&
-                        proj.y > enemy.y - enemy.height/2 &&
-                        proj.y < enemy.y + enemy.height/2
-                    ) {
-                        // Hit enemy
-                        enemy.health -= 10;
-                        
-                        // Create explosion particles
-                        for (let i = 0; i < 5; i++) {
-                            particles.push({
-                                x: enemy.x,
-                                y: enemy.y,
-                                radius: Math.random() * 3 + 1,
-                                color: enemy.color,
-                                alpha: 1,
-                                vx: (Math.random() - 0.5) * 4,
-                                vy: (Math.random() - 0.5) * 4
-                            });
-                        }
-                        
-                        // Check if enemy is destroyed
-                        if (enemy.health <= 0) {
-                            enemyObjects.splice(enemyIndex, 1);
-                            score += enemy.points;
-                            
-                            // Create more explosion particles
-                            for (let i = 0; i < 15; i++) {
-                                particles.push({
-                                    x: enemy.x,
-                                    y: enemy.y,
-                                    radius: Math.random() * 4 + 2,
-                                    color: '#ffff00',
-                                    alpha: 1,
-                                    vx: (Math.random() - 0.5) * 6,
-                                    vy: (Math.random() - 0.5) * 6
-                                });
-                            }
-                            
-                            // Remove projectile
-                            playerProjectiles.splice(projIndex, 1);
-                            break;
-                        }
+                    // Create explosion particles
+                    for (let i = 0; i < 5; i++) {
+                        particles.push({
+                            x: enemy.x,
+                            y: enemy.y,
+                            radius: Math.random() * 3 + 1,
+                            color: enemy.color,
+                            alpha: 1,
+                            vx: (Math.random() - 0.5) * 4,
+                            vy: (Math.random() - 0.5) * 4
+                        });
                     }
+                    
+                    // Check if enemy is destroyed
+                    if (enemy.health <= 0) {
+                        enemyObjects.splice(enemyIndex, 1);
+                        score += enemy.points;
+                        
+                        // Create more explosion particles
+                        for (let i = 0; i < 15; i++) {
+                        particles.push({
+                            x: enemy.x,
+                            y: enemy.y,
+                            radius: Math.random() * 4 + 2,
+                            color: '#ffff00',
+                            alpha: 1,
+                            vx: (Math.random() - 0.5) * 6,
+                            vy: (Math.random() - 0.5) * 6
+                        });
+                    }
+                    
+                    // Remove projectile
+                    playerProjectiles.splice(projIndex, 1);
+                    break;
                 }
             }
         }
+    }
         
         // Fire weapon
         function fireWeapon() {
@@ -553,10 +552,17 @@
             
             mainMenu.style.display = 'none';
             pauseMenu.style.display = 'none';
+            
+            // Clear any existing game state
+            enemySpawnTimer = 0;
+            updateUI();
+            
+            console.log("Game started successfully!");
         }
         
         // Pause game
         function pauseGame() {
+            if (!gameRunning) return;
             gamePaused = true;
             pauseMenu.style.display = 'flex';
         }
@@ -598,7 +604,7 @@
             drawProjectiles();
             drawParticles();
             
-            // Update game elements
+            // Update game elements if game is running and not paused
             if (gameRunning && !gamePaused) {
                 updatePlayer();
                 updateProjectiles();
